@@ -22,6 +22,7 @@ function Home() {
     e.preventDefault()
 
     localStorage.setItem('username', username)
+    socket.emit('newUser', { username, id: socket.id })
     navigate('/chat')
   }
 
