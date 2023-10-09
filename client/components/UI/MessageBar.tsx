@@ -18,7 +18,7 @@ function MessageBar() {
   }
 
   return (
-    <section className="fixed bottom-0 left-0 right-0 p-4 flex justify-center">
+    <section className="fixed bottom-0 left-0 right-0 p-4 flex justify-center bg-teal-500">
       <form onSubmit={sendMessage} className="w-screen ml-80 pr-4">
         <div className="flex">
           <input

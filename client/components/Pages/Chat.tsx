@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import ActiveUsers from '../UI/ActiveUsers'
 import ChatBody from '../UI/ChatBody'
-import MessageBar from '../UI/MessageBar'
 import { useEffect, useRef, useState } from 'react'
 import { socket } from './Home'
 import { Message } from '../../../types/Message'
@@ -37,7 +36,7 @@ function Chat() {
           Leave chat
         </button>
       </header>
-      <div className="flex flex-grow">
+      <div className="flex flex-grow overflow-y-scroll">
         <ActiveUsers users={users} />
         <ChatBody messages={messages} lastMessage={lastMessage} />
       </div>

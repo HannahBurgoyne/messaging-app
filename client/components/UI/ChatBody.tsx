@@ -16,7 +16,7 @@ function ChatBody(props: Props) {
         {props.messages.map((message) =>
           message.name === localStorage.getItem('username') ? (
             <div>
-              <div className="fixed right-0 m-12">
+              <div className="ml-auto">
                 <p>You</p>
                 <div className="bg-teal-300 p-4">
                   <p>{message.text}</p>
