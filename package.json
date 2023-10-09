@@ -6,7 +6,7 @@
   "main": "server/index.ts",
   "scripts": {
     "start": "node ./dist/server.js",
-    "dev": "run-p dev:server dev:client dev:css",
+    "dev": "run-p dev:*",
     "dev:server": "tsx watch server/index.ts",
     "dev:client": "vite",
     "dev:css": "tailwindcss -i client/styles/input.css -o public/output.css --watch",
@@ -40,6 +40,7 @@
     "express": "^4.17.2",
     "pg": "^8.11.3",
     "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2",
     "tailwind-merge": "^1.14.0"
   },
   "devDependencies": {
