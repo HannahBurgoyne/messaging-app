@@ -5,6 +5,7 @@ import MessageBar from '../UI/MessageBar'
 import { useEffect, useState } from 'react'
 import { socket } from './Home'
 import { Message } from '../../../types/Message'
+import { User } from '../../../types/User'
 
 function Chat() {
   const navigate = useNavigate()
@@ -15,10 +16,12 @@ function Chat() {
   }
 
   const [messages, setMessages] = useState([] as Message[])
+  const [users, setUsers] = useState([] as User[])
 
   useEffect(() => {
     socket.on('messageResponse', (data) => setMessages([...messages, data]))
-  }, [socket, messages])
+    socket.on('newUserResponse', (data) => setUsers(data))
+  }, [socket, messages, users])
 
   return (
     <>
@@ -28,7 +31,7 @@ function Chat() {
         </button>
       </header>
       <div className="flex flex-grow">
-        <ActiveUsers />
+        <ActiveUsers users={users} />
         <ChatBody messages={messages} />
       </div>
     </>
