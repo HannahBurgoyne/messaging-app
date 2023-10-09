@@ -31,6 +31,10 @@ if (process.env.NODE_ENV === 'production') {
 
 io.on('connection', (socket) => {
   console.log(`client ${socket.id} just connected`)
+
+  socket.on('message', (data) => {
+    io.emit('messageResponse', data)
+  })
   socket.on('disconnect', () => {
     console.log(`client ${socket.id} disconnected`)
   })
