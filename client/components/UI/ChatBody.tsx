@@ -1,26 +1,34 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import MessageBar from './MessageBar'
+import { Message } from '../../../types/Message'
 
-function ChatBody() {
+interface Props {
+  messages: Message[]
+}
+
+function ChatBody(props: Props) {
   return (
     <>
       <section className="p-12">
-        <div>
-          <div className="fixed right-0 m-12">
-            <p>You</p>
-            <div className="bg-teal-300 p-4">
-              <p>Hello</p>
+        {props.messages.map((message) =>
+          message.name === localStorage.getItem('username') ? (
+            <div>
+              <div className="fixed right-0 m-12">
+                <p>You</p>
+                <div className="bg-teal-300 p-4">
+                  <p>{message.text}</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <div>
-          <p>Other</p>
-          <div className="bg-gray-300 p-4">
-            <p>Hey</p>
-          </div>
-        </div>
+          ) : (
+            <div>
+              <p>{message.name}</p>
+              <div className="bg-gray-300 p-4">
+                <p>{message.text}</p>
+              </div>
+            </div>
+          )
+        )}
 
         <div className="fixed bottom-0 mb-20">
           <p>User is typing...</p>

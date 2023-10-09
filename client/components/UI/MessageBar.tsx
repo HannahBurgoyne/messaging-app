@@ -1,12 +1,19 @@
 import React from 'react'
 import { useState } from 'react'
+import { socket } from '../Pages/Home'
 
 function MessageBar() {
   const [message, setMessage] = useState('')
 
   function sendMessage(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    console.log({ username: localStorage.getItem('username'), message })
+    if (message.trim() && localStorage.getItem('username')) {
+      socket.emit('message', {
+        text: message,
+        name: localStorage.getItem('username'),
+        id: `${socket.id}`,
+      })
+    }
     setMessage('')
   }
 
