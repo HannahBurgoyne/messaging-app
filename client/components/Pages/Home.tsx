@@ -32,7 +32,7 @@ function Home() {
       <label htmlFor="username">Username</label>
       <input
         type="text"
-        minLength={10}
+        minLength={5}
         name="username"
         id="username"
         value={username}

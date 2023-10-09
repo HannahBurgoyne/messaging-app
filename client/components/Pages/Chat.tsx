@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import ActiveUsers from '../UI/ActiveUsers'
 import ChatBody from '../UI/ChatBody'
 import MessageBar from '../UI/MessageBar'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { socket } from './Home'
 import { Message } from '../../../types/Message'
 import { User } from '../../../types/User'
@@ -17,11 +17,18 @@ function Chat() {
 
   const [messages, setMessages] = useState([] as Message[])
   const [users, setUsers] = useState([] as User[])
+  const lastMessage = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     socket.on('messageResponse', (data) => setMessages([...messages, data]))
     socket.on('newUserResponse', (data) => setUsers(data))
   }, [socket, messages, users])
+
+  useEffect(() => {
+    if (lastMessage) {
+      lastMessage.current?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [messages])
 
   return (
     <>
@@ -32,7 +39,7 @@ function Chat() {
       </header>
       <div className="flex flex-grow">
         <ActiveUsers users={users} />
-        <ChatBody messages={messages} />
+        <ChatBody messages={messages} lastMessage={lastMessage} />
       </div>
     </>
   )
