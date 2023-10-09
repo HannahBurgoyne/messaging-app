@@ -4,8 +4,8 @@ import {
   createRoutesFromElements,
 } from 'react-router-dom'
 import App from './components/App'
-import Home from './components/Home'
-import Chat from './components/Chat'
+import Home from './components/Pages/Home'
+import Chat from './components/Pages/Chat'
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
