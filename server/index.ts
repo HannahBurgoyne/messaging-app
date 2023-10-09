@@ -5,6 +5,7 @@ const server = express()
 import { createServer } from 'http'
 import { Server } from 'socket.io'
 import dotenv from 'dotenv'
+import { User } from '../types/User'
 
 const app = express()
 const httpServer = createServer(app)
@@ -29,14 +30,25 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
+let users = [] as User[]
+
 io.on('connection', (socket) => {
   console.log(`client ${socket.id} just connected`)
 
   socket.on('message', (data) => {
     io.emit('messageResponse', data)
   })
+
+  socket.on('newUser', (data) => {
+    users.push(data)
+    io.emit('newUserResponse', users)
+  })
+
   socket.on('disconnect', () => {
     console.log(`client ${socket.id} disconnected`)
+    users = users.filter((user) => user.id !== socket.id)
+    io.emit('newUserResponse', users)
+    socket.disconnect()
   })
 })
 
