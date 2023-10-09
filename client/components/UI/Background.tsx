@@ -3,7 +3,11 @@ interface Props {
 }
 
 function Background(props: Props) {
-  return <div className="bg-emerald-100 fixed inset-0 ">{props.children}</div>
+  return (
+    <main className="bg-emerald-100 inset-0 flex flex-col min-h-screen">
+      {props.children}
+    </main>
+  )
 }
 
 export default Background

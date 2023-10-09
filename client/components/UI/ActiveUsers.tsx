@@ -1,7 +1,7 @@
 function ActiveUsers() {
   return (
     <>
-      <div className="bg-emerald-300">
+      <div className="bg-emerald-300 flex flex-col p-20">
         <h2>Online now</h2>
         <ul>
           <li>User 1</li>

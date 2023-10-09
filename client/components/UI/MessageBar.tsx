@@ -11,15 +11,18 @@ function MessageBar() {
   }
 
   return (
-    <section>
-      <form onSubmit={sendMessage}>
-        <input
-          type="text"
-          placeholder="Write a message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <button>Send</button>
+    <section className="fixed bottom-0 left-0 right-0 p-4 flex justify-center">
+      <form onSubmit={sendMessage} className="w-screen ml-80 pr-4">
+        <div className="flex">
+          <input
+            type="text"
+            placeholder="Write a message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            className="p-2 flex-grow"
+          />
+          <button className="bg-teal-300 p-2">Send</button>
+        </div>
       </form>
     </section>
   )
