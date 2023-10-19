@@ -13,7 +13,7 @@ const __dirname = Path.dirname(__filename)
 const server = express()
 const app = express()
 const httpServer = createServer(app)
-console.log(httpServer)
+
 const io = new Server(httpServer, {
   cors: { origin: 'https://messaging-app-websockets.up.railway.app/' },
 })
