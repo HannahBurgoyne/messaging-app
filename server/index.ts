@@ -2,7 +2,7 @@ import * as Path from 'node:path'
 import * as URL from 'node:url'
 import express from 'express'
 import cors from 'cors'
-import { createServer } from 'http'
+import { createServer } from 'node:http'
 import { Server } from 'socket.io'
 import dotenv from 'dotenv'
 import { User } from '../types/User'
@@ -20,10 +20,6 @@ const io = new Server(httpServer, {
 dotenv.config()
 
 const port = process.env.PORT || 3000
-
-httpServer.listen(port, () => {
-  console.log('Server listening on port', port)
-})
 
 app.use(express.json())
 app.use(express.static(Path.join(__dirname, 'public')))
@@ -59,4 +55,7 @@ io.on('connection', (socket) => {
   })
 })
 
+httpServer.listen(port, () => {
+  console.log('Server listening on port', port)
+})
 export default app
