@@ -10,8 +10,8 @@ import { User } from '../types/User'
 const __filename = URL.fileURLToPath(import.meta.url)
 const __dirname = Path.dirname(__filename)
 
-const app = express()
-const httpServer = createServer(app)
+const server = express()
+const httpServer = createServer(server)
 
 const io = new Server(httpServer, {
   cors: { origin: 'https://messaging-app-websockets.up.railway.app/' },
@@ -21,14 +21,14 @@ dotenv.config()
 
 const port = process.env.PORT || 3000
 
-app.use(express.json())
-app.use(express.static(Path.join(__dirname, 'public')))
-app.use(cors())
+server.use(express.json())
+server.use(express.static(Path.join(__dirname, 'public')))
+server.use(cors())
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(Path.resolve('public')))
-  app.use('/assets', express.static(Path.resolve('./dist/assets')))
-  app.get('*', (req, res) => {
+  server.use(express.static(Path.resolve('public')))
+  server.use('/assets', express.static(Path.resolve('./dist/assets')))
+  server.get('*', (req, res) => {
     res.sendFile(Path.resolve('./dist/index.html'))
   })
 }
@@ -58,4 +58,4 @@ io.on('connection', (socket) => {
 httpServer.listen(port, () => {
   console.log('Server listening on port', port)
 })
-export default app
+export default server
