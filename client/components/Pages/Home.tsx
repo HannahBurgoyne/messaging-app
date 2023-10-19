@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { io } from 'socket.io-client'
 
-export const socket = io({
+export const socket = io('https://messaging-app-websockets.up.railway.app/', {
   transports: ['websocket'],
 })
 
