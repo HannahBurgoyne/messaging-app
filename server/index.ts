@@ -1,4 +1,5 @@
 import * as Path from 'node:path'
+import * as URL from 'node:url'
 import express from 'express'
 import cors from 'cors'
 const server = express()
@@ -6,6 +7,9 @@ import { createServer } from 'http'
 import { Server } from 'socket.io'
 import dotenv from 'dotenv'
 import { User } from '../types/User'
+
+const __filename = URL.fileURLToPath(import.meta.url)
+const __dirname = Path.dirname(__filename)
 
 const app = express()
 const httpServer = createServer(app)
@@ -20,6 +24,7 @@ httpServer.listen(port, () => {
 })
 
 server.use(express.json())
+server.use(express.static(Path.join(__dirname, 'public')))
 server.use(cors())
 
 if (process.env.NODE_ENV === 'production') {

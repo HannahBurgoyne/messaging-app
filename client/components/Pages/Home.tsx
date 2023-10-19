@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom'
 
 import { io } from 'socket.io-client'
 
-export const socket = io('http://localhost:3000', { transports: ['websocket'] })
+export const socket = io('http://localhost:3000 || ', {
+  transports: ['websocket'],
+})
 
 socket.on('connect', () => {
   console.log(socket.id)
