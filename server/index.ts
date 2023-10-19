@@ -10,7 +10,6 @@ import { User } from '../types/User'
 const __filename = URL.fileURLToPath(import.meta.url)
 const __dirname = Path.dirname(__filename)
 
-const server = express()
 const app = express()
 const httpServer = createServer(app)
 
@@ -26,14 +25,14 @@ httpServer.listen(port, () => {
   console.log('Server listening on port', port)
 })
 
-server.use(express.json())
-server.use(express.static(Path.join(__dirname, 'public')))
-server.use(cors())
+app.use(express.json())
+app.use(express.static(Path.join(__dirname, 'public')))
+app.use(cors())
 
 if (process.env.NODE_ENV === 'production') {
-  server.use(express.static(Path.resolve('public')))
-  server.use('/assets', express.static(Path.resolve('./dist/assets')))
-  server.get('*', (req, res) => {
+  app.use(express.static(Path.resolve('public')))
+  app.use('/assets', express.static(Path.resolve('./dist/assets')))
+  app.get('*', (req, res) => {
     res.sendFile(Path.resolve('./dist/index.html'))
   })
 }
@@ -60,4 +59,4 @@ io.on('connection', (socket) => {
   })
 })
 
-export default server
+export default app
